@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Settings - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gold: #C6A43F;
+            --dark-bg: #2C2C2C;
+        }
+        body {
+            background-color: #f4f6f9;
+        }
+        .sidebar {
+            background-color: var(--dark-bg);
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            color: white;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            display: block;
+            transition: all 0.3s;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background-color: var(--primary-gold);
+            padding-left: 30px;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .navbar-top {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: white;
+        }
+        .btn-gold:hover {
+            background-color: #9c8232;
+            color: white;
+        }
+        .form-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="p-3 text-center">
+            <h3 style="color: var(--primary-gold);">Shatsheeri</h3>
+            <p class="small">Admin Panel</p>
+        </div>
+        <hr>
+        <a href="/admin/dashboard">
+            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+        </a>
+        <a href="/admin/products">
+            <i class="fas fa-gem me-2"></i> Products
+        </a>
+        <a href="/admin/orders">
+            <i class="fas fa-shopping-cart me-2"></i> Orders
+        </a>
+        <a href="/admin/sms_settings" class="active">
+            <i class="fas fa-sms me-2"></i> SMS Settings
+        </a>
+        <a href="/admin/logout">
+            <i class="fas fa-sign-out-alt me-2"></i> Logout
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="navbar-top">
+            <h4>SMS Notification Settings</h4>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="form-card">
+            <form method="POST">
+                <div class="mb-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="sms_enabled" name="sms_enabled" {% if config.get('sms_enabled') %}checked{% endif %}>
+                        <label class="form-check-label" for="sms_enabled">
+                            <i class="fas fa-bell"></i> Enable SMS Notifications
+                        </label>
+                    </div>
+                    <small class="text-muted">When enabled, customers will receive SMS confirmations for orders and status updates.</small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="api_key" class="form-label">TextLocal API Key</label>
+                    <input type="text" class="form-control" id="api_key" name="api_key" value="{{ config.get('api_key', '') }}" placeholder="Enter your TextLocal API key">
+                    <small class="text-muted">Get your API key from <a href="https://textlocal.com" target="_blank">TextLocal</a> (popular in Bangladesh)</small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="sender_id" class="form-label">Sender ID (6 characters max)</label>
+                    <input type="text" class="form-control" id="sender_id" name="sender_id" value="{{ config.get('sender_id', 'SHATSH') }}" maxlength="6">
+                    <small class="text-muted">Your SMS will appear from this ID. Example: SHATSH</small>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>SMS Provider:</strong> This system uses TextLocal API for sending SMS in Bangladesh.
+                    <br>To enable SMS:
+                    <ol class="mb-0 mt-2">
+                        <li>Sign up at <a href="https://textlocal.com" target="_blank">textlocal.com</a></li>
+                        <li>Get your API key from dashboard</li>
+                        <li>Enter the API key above and enable SMS</li>
+                        <li>Test by placing an order or using the test feature below</li>
+                    </ol>
+                </div>
+
+                <div class="alert alert-warning">
+                    <i class="fas fa-envelope"></i>
+                    <strong>Email Configuration:</strong> For email notifications, configure SMTP settings in app.py:
+                    <code class="d-block mt-1">app.config['MAIL_USERNAME'] = 'your_email@gmail.com'</code>
+                    <code class="d-block">app.config['MAIL_PASSWORD'] = 'your_app_password'</code>
+                    <small class="d-block mt-1">Note: For Gmail, you need to use an App Password (enable 2FA first).</small>
+                </div>
+
+                <button type="submit" class="btn btn-gold">
+                    <i class="fas fa-save"></i> Save Settings
+                </button>
+                <a href="/admin/dashboard" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+
+        <div class="mt-4">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0"><i class="fas fa-flask"></i> Test SMS Service</h5>
+                </div>
+                <div class="card-body">
+                    <p>Send a test SMS to verify your configuration:</p>
+                    <form id="testSmsForm">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="test_phone" placeholder="Phone number (e.g., 017XXXXXXXX)" required>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-gold" onclick="sendTestSms()">
+                                    <i class="fas fa-paper-plane"></i> Send Test SMS
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="testResult" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <div class="alert alert-secondary">
+                <i class="fas fa-question-circle"></i>
+                <strong>SMS Message Format:</strong>
+                <ul class="mt-2 mb-0">
+                    <li><strong>Order Confirmation:</strong> "Dear {name}, Thank you for your order #{id} at Shatsheeri! Amount: ৳{total}. We'll process it soon."</li>
+                    <li><strong>Status Update:</strong> "Dear {name}, your order #{id} at Shatsheeri is now {status}. Thank you for shopping with us!"</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function sendTestSms() {
+            const phone = document.getElementById('test_phone').value;
+            const resultDiv = document.getElementById('testResult');
+
+            if (!phone) {
+                resultDiv.innerHTML = '<div class="alert alert-danger">Please enter a phone number</div>';
+                return;
+            }
+
+            resultDiv.innerHTML = '<div class="alert alert-info">Sending test SMS...</div>';
+
+            fetch('/admin/test_sms', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phone: phone })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    resultDiv.innerHTML = '<div class="alert alert-success">✓ Test SMS sent successfully! Check your phone.</div>';
+                } else {
+                    resultDiv.innerHTML = '<div class="alert alert-danger">✗ Failed to send SMS: ' + data.message + '<br>Please check your API key and settings.</div>';
+                }
+            })
+            .catch(error => {
+                resultDiv.innerHTML = '<div class="alert alert-danger">Error: ' + error + '</div>';
+            });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

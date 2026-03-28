@@ -1,0 +1,91 @@
+{
+  "order_confirmation": {
+    "name": "Order Confirmation",
+    "template": "Dear {customer_name}, Thank you for your order #{order_id} at Shatsheeri! Amount: ৳{total}. We will process it soon. Visit: shatsheeri.com",
+    "variables": [
+      "customer_name",
+      "order_id",
+      "total"
+    ],
+    "active": true
+  },
+  "order_processing": {
+    "name": "Order Processing",
+    "template": "Dear {customer_name}, Your order #{order_id} at Shatsheeri is now being processed. We will ship it soon. Thank you for your patience!",
+    "variables": [
+      "customer_name",
+      "order_id"
+    ],
+    "active": true
+  },
+  "order_shipped": {
+    "name": "Order Shipped",
+    "template": "Dear {customer_name}, Great news! Your order #{order_id} from Shatsheeri has been shipped. Expected delivery in 2-3 business days.",
+    "variables": [
+      "customer_name",
+      "order_id"
+    ],
+    "active": true
+  },
+  "order_delivered": {
+    "name": "Order Delivered",
+    "template": "Dear {customer_name}, Your order #{order_id} from Shatsheeri has been delivered! Thank you for shopping with us. We hope you love your jewelry!",
+    "variables": [
+      "customer_name",
+      "order_id"
+    ],
+    "active": true
+  },
+  "order_cancelled": {
+    "name": "Order Cancelled",
+    "template": "Dear {customer_name}, Your order #{order_id} at Shatsheeri has been cancelled. Amount ৳{total} will be refunded within 3-5 business days.",
+    "variables": [
+      "customer_name",
+      "order_id",
+      "total"
+    ],
+    "active": true
+  },
+  "payment_reminder": {
+    "name": "Payment Reminder",
+    "template": "Dear {customer_name}, Reminder: Your order #{order_id} at Shatsheeri (৳{total}) is pending payment. Please complete payment within 24 hours.",
+    "variables": [
+      "customer_name",
+      "order_id",
+      "total"
+    ],
+    "active": true
+  },
+  "welcome_sms": {
+    "name": "Welcome SMS",
+    "template": "Welcome to Shatsheeri, {customer_name}! Get 10% off on your first order. Use code: WELCOME10. Shop now: shatsheeri.com",
+    "variables": [
+      "customer_name"
+    ],
+    "active": true
+  },
+  "abandoned_cart": {
+    "name": "Abandoned Cart",
+    "template": "Hi {customer_name}, You left items worth ৳{cart_total} in your cart at Shatsheeri! Complete your order now for express delivery.",
+    "variables": [
+      "customer_name",
+      "cart_total"
+    ],
+    "active": true
+  },
+  "festival_offer": {
+    "name": "Festival Offer",
+    "template": "🎉 Eid/Puja Special Offer! Up to 30% off on all jewelry at Shatsheeri. Limited time only! Shop now: shatsheeri.com/festival",
+    "variables": [],
+    "active": true
+  },
+  "feedback_request": {
+    "name": "Feedback Request",
+    "template": "Dear {customer_name}, How was your shopping experience at Shatsheeri? Please share your feedback: shatsheeri.com/review/{order_id}",
+    "variables": [
+      "customer_name",
+      "order_id"
+    ],
+    "active": true
+  }
+}

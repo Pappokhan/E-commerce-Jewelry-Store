@@ -1,0 +1,162 @@
+{
+  "necklaces": [
+    {
+      "id": 1,
+      "name": "Traditional Gold Necklace",
+      "price": 4500,
+      "image": "/static/images/necklace1.jpg",
+      "category": "Necklace",
+      "description": "Exquisite traditional gold-plated necklace with intricate design, perfect for weddings and festive occasions.",
+      "stock": 10,
+      "featured": true
+    },
+    {
+      "id": 3,
+      "name": "Party Wear Choker",
+      "price": 3900,
+      "image": "/static/images/necklace3.jpg",
+      "category": "Necklace",
+      "description": "Stunning choker necklace with kundan work, perfect for parties and celebrations.",
+      "stock": 7,
+      "featured": true
+    },
+    {
+      "id": 16,
+      "name": "Antique Choker Set with Earrings, Trendy, Long Lasting, Budget Friendly Festive Jewelry",
+      "price": 2000,
+      "image": "https://bd-live-21.slatic.net/kf/S658edaa6a2e0495eaf736f69ff910008m.jpg",
+      "category": "Necklaces",
+      "description": "New",
+      "stock": 17,
+      "featured": true
+    }
+  ],
+  "earrings": [
+    {
+      "id": 4,
+      "name": "Jhumka Earrings",
+      "price": 1200,
+      "image": "/static/images/earrings1.jpg",
+      "category": "Earrings",
+      "description": "Traditional jhumka earrings with delicate design, adds grace to any ethnic outfit.",
+      "stock": 20,
+      "featured": false
+    },
+    {
+      "id": 5,
+      "name": "Stud Earrings Set",
+      "price": 800,
+      "image": "/static/images/earrings2.jpg",
+      "category": "Earrings",
+      "description": "Modern stud earrings set in gold tone, comfortable for daily use.",
+      "stock": 24,
+      "featured": true
+    },
+    {
+      "id": 6,
+      "name": "Hanging Chandelier",
+      "price": 2100,
+      "image": "/static/images/earrings3.jpg",
+      "category": "Earrings",
+      "description": "Elegant chandelier earrings with crystal work, perfect for evening parties.",
+      "stock": 12,
+      "featured": false
+    }
+  ],
+  "bangles": [
+    {
+      "id": 7,
+      "name": "Gold Plated Bangle Set",
+      "price": 1800,
+      "image": "/static/images/bangles1.jpg",
+      "category": "Bangles",
+      "description": "Beautiful set of 4 gold-plated bangles with intricate carving, traditional charm.",
+      "stock": 18,
+      "featured": true
+    },
+    {
+      "id": 8,
+      "name": "Kada Bracelet",
+      "price": 1500,
+      "image": "/static/images/bangles2.jpg",
+      "category": "Bangles",
+      "description": "Modern Kada bracelet with minimal design, suitable for both casual and formal wear.",
+      "stock": 22,
+      "featured": false
+    },
+    {
+      "id": 9,
+      "name": "Stone Studded Bangle",
+      "price": 2200,
+      "image": "/static/images/bangles3.jpg",
+      "category": "Bangles",
+      "description": "Elegant stone-studded bangle with traditional motif, adds sparkle to your wrist.",
+      "stock": 14,
+      "featured": false
+    }
+  ],
+  "rings": [
+    {
+      "id": 10,
+      "name": "Solitaire Ring",
+      "price": 3500,
+      "image": "/static/images/rings1.jpg",
+      "category": "Ring",
+      "description": "Classic solitaire ring with cubic zirconia, timeless elegance.",
+      "stock": 16,
+      "featured": true
+    },
+    {
+      "id": 11,
+      "name": "Adjustable Floral Ring",
+      "price": 600,
+      "image": "/static/images/rings2.jpg",
+      "category": "Ring",
+      "description": "Adjustable ring with floral design, perfect for daily wear.",
+      "stock": 29,
+      "featured": false
+    },
+    {
+      "id": 12,
+      "name": "Stackable Ring Set",
+      "price": 1800,
+      "image": "/static/images/rings3.jpg",
+      "category": "Ring",
+      "description": "Set of 3 stackable rings with minimalist design, trendy and stylish.",
+      "stock": 20,
+      "featured": false
+    }
+  ],
+  "anklets": [
+    {
+      "id": 13,
+      "name": "Silver Anklet",
+      "price": 900,
+      "image": "/static/images/anklets1.jpg",
+      "category": "Anklets",
+      "description": "Traditional silver-plated anklet with small bells, adds charm to your steps.",
+      "stock": 25,
+      "featured": false
+    },
+    {
+      "id": 14,
+      "name": "Pearl Anklet Chain",
+      "price": 1100,
+      "image": "/static/images/anklets2.jpg",
+      "category": "Anklets",
+      "description": "Elegant pearl anklet chain with adjustable length.",
+      "stock": 18,
+      "featured": false
+    },
+    {
+      "id": 15,
+      "name": "Designer Anklet",
+      "price": 1600,
+      "image": "/static/images/anklets3.jpg",
+      "category": "Anklets",
+      "description": "Designer anklet with intricate work and stone embellishments.",
+      "stock": 12,
+      "featured": true
+    }
+  ]
+}

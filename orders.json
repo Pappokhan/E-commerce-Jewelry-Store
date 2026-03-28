@@ -1,0 +1,94 @@
+[
+  {
+    "id": 1,
+    "order_date": "2026-03-28 19:57:14",
+    "customer": {
+      "name": "Md. Shahidul Khan Pappo",
+      "email": "mdshahidulkhanpappo1999@gmail.com",
+      "phone": "01914433835",
+      "address": "dhaka, Bangladesh"
+    },
+    "items": [
+      {
+        "id": 5,
+        "name": "Stud Earrings Set",
+        "price": 800,
+        "quantity": 1,
+        "image": "/static/images/earrings2.jpg"
+      }
+    ],
+    "total": 800,
+    "payment_method": "cash on delivery",
+    "status": "Delivered",
+    "order_status": "Delivered"
+  },
+  {
+    "id": 2,
+    "order_date": "2026-03-28 20:01:10",
+    "customer": {
+      "name": "Md. Shahidul Khan Pappo",
+      "email": "mdshahidulkhanpappo1999@gmail.com",
+      "phone": "01914433835",
+      "address": "Dhaka, BD"
+    },
+    "items": [
+      {
+        "id": 11,
+        "name": "Adjustable Floral Ring",
+        "price": 600,
+        "quantity": 1,
+        "image": "/static/images/rings2.jpg"
+      }
+    ],
+    "total": 600,
+    "payment_method": "cash on delivery",
+    "status": "Delivered",
+    "order_status": "Delivered"
+  },
+  {
+    "id": 3,
+    "order_date": "2026-03-28 20:12:49",
+    "customer": {
+      "name": "Md. Shahidul Khan Pappo",
+      "email": "mdshahidulkhanpappo1999@gmail.com",
+      "phone": "01914433835",
+      "address": "dhaka, Bangladesh"
+    },
+    "items": [
+      {
+        "id": 2,
+        "name": "Minimal Pearl Necklace",
+        "price": 2800,
+        "quantity": 7,
+        "image": "/static/images/necklace2.jpg"
+      }
+    ],
+    "total": 19600,
+    "payment_method": "cash on delivery",
+    "status": "Delivered",
+    "order_status": "Delivered"
+  },
+  {
+    "id": 4,
+    "order_date": "2026-03-28 20:23:14",
+    "customer": {
+      "name": "Shahidul",
+      "email": "md999@gmail.com",
+      "phone": "01914433000",
+      "address": "New Dhaka"
+    },
+    "items": [
+      {
+        "id": 16,
+        "name": "Antique Choker Set with Earrings, Trendy, Long Lasting, Budget Friendly Festive Jewelry",
+        "price": 2000,
+        "quantity": 3,
+        "image": "https://bd-live-21.slatic.net/kf/S658edaa6a2e0495eaf736f69ff910008m.jpg"
+      }
+    ],
+    "total": 6000,
+    "payment_method": "cash on delivery",
+    "status": "Delivered",
+    "order_status": "Delivered"
+  }
+]

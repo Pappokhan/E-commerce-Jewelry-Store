@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order #{{ order.id }} - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gold: #C6A43F;
+            --dark-bg: #2C2C2C;
+        }
+        body {
+            background-color: #f4f6f9;
+        }
+        .sidebar {
+            background-color: var(--dark-bg);
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            color: white;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            display: block;
+            transition: all 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: var(--primary-gold);
+            padding-left: 30px;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .navbar-top {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: white;
+        }
+        .btn-gold:hover {
+            background-color: #9c8232;
+            color: white;
+        }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .status-pending {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .status-processing {
+            background-color: #17a2b8;
+            color: white;
+        }
+        .status-delivered {
+            background-color: #28a745;
+            color: white;
+        }
+        .status-cancelled {
+            background-color: #dc3545;
+            color: white;
+        }
+        .order-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .info-row {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="p-3 text-center">
+            <h3 style="color: var(--primary-gold);">Shatsheeri</h3>
+            <p class="small">Admin Panel</p>
+        </div>
+        <hr>
+        <a href="/admin/dashboard">
+            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+        </a>
+        <a href="/admin/products">
+            <i class="fas fa-gem me-2"></i> Products
+        </a>
+        <a href="/admin/orders">
+            <i class="fas fa-shopping-cart me-2"></i> Orders
+        </a>
+        <a href="/admin/sms_settings">
+            <i class="fas fa-sms me-2"></i> SMS Settings
+        </a>
+        <a href="/admin/logout">
+            <i class="fas fa-sign-out-alt me-2"></i> Logout
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="navbar-top">
+            <h4>Order Details #{{ order.id }}</h4>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="order-card">
+                    <h5><i class="fas fa-user"></i> Customer Information</h5>
+                    <hr>
+                    <div class="info-row">
+                        <strong>Name:</strong> {{ order.customer.name if order.customer else 'N/A' }}
+                    </div>
+                    <div class="info-row">
+                        <strong>Email:</strong> {{ order.customer.email if order.customer else 'N/A' }}
+                    </div>
+                    <div class="info-row">
+                        <strong>Phone:</strong> {{ order.customer.phone if order.customer else 'N/A' }}
+                    </div>
+                    <div class="info-row">
+                        <strong>Address:</strong> {{ order.customer.address if order.customer else 'N/A' }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="order-card">
+                    <h5><i class="fas fa-info-circle"></i> Order Information</h5>
+                    <hr>
+                    <div class="info-row">
+                        <strong>Order Date:</strong> {{ order.order_date }}
+                    </div>
+                    <div class="info-row">
+                        <strong>Payment Method:</strong>
+                        {% if order.payment_method == 'cash on delivery' %}
+                            <i class="fas fa-money-bill-wave"></i> Cash on Delivery
+                        {% elif order.payment_method == 'bkash' %}
+                            <i class="fas fa-mobile-alt"></i> bKash / Nagad
+                        {% else %}
+                            <i class="fab fa-cc-visa"></i> Credit/Debit Card
+                        {% endif %}
+                    </div>
+                    <div class="info-row">
+                        <strong>Status:</strong>
+                        <span class="status-badge status-{{ order.status|lower if order.status else 'pending' }}">
+                            {{ order.status if order.status else 'Pending' }}
+                        </span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Total Amount:</strong>
+                        <span class="fs-4" style="color: var(--primary-gold);">৳{{ "{:,.0f}".format(order.total) if order.total else '0' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="order-card">
+            <h5><i class="fas fa-shopping-bag"></i> Order Items</h5>
+            <hr>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                         <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {# Safe iteration that checks if order.items is iterable #}
+                        {% if order.items is defined and order.items %}
+                            {% if order.items is iterable and not order.items is string %}
+                                {% for item in order.items %}
+                                    {% if item is mapping %}
+                                    <tr>
+                                        <td>
+                                            <strong>{{ item.get('name', 'Unknown Product') }}</strong>
+                                            <br>
+                                            <small class="text-muted">ID: {{ item.get('id', 'N/A') }}</small>
+                                        </td>
+                                        <td>৳{{ item.get('price', 0) }}</td>
+                                        <td>{{ item.get('quantity', 0) }}</td>
+                                        <td>৳{{ (item.get('price', 0) * item.get('quantity', 0)) }}</td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="4" class="text-warning">Invalid item format</td>
+                                    </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="4" class="text-muted">No items found in this order</td>
+                                </tr>
+                            {% endif %}
+                        {% else %}
+                            <tr>
+                                <td colspan="4" class="text-muted">No items found in this order</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-active">
+                            <td colspan="3" class="text-end"><strong>Subtotal:</strong></td>
+                            <td><strong>৳{{ order.total if order.total else 0 }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-end">Shipping:</td>
+                            <td>Free</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-end">Tax:</td>
+                            <td>৳0</td>
+                        </tr>
+                        <tr class="table-warning">
+                            <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                            <td><strong class="fs-5" style="color: var(--primary-gold);">৳{{ order.total if order.total else 0 }}</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="/admin/orders" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Orders
+            </a>
+            <div>
+                {% if order.status != 'Cancelled' and order.status != 'Delivered' %}
+                <form method="POST" action="/admin/order/update_status/{{ order.id }}" style="display: inline-block;">
+                    <select name="status" class="form-select d-inline-block w-auto" onchange="this.form.submit()" style="width: auto;">
+                        <option value="Pending" {% if order.status == 'Pending' %}selected{% endif %}>Pending</option>
+                        <option value="Processing" {% if order.status == 'Processing' %}selected{% endif %}>Processing</option>
+                        <option value="Delivered" {% if order.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+                    </select>
+                </form>
+                <a href="/admin/order/cancel/{{ order.id }}" class="btn btn-danger" onclick="return confirm('Cancel this order? Stock will be restored.')">
+                    <i class="fas fa-times"></i> Cancel Order
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="alert alert-info mt-3">
+            <i class="fas fa-envelope"></i>
+            <strong>Notifications:</strong> When you update the order status, the customer will automatically receive:
+            <ul class="mb-0 mt-2">
+                <li>Email notification with status update</li>
+                <li>SMS notification (if SMS is enabled)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
